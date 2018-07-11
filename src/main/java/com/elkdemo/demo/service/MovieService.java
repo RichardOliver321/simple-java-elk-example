@@ -67,13 +67,13 @@ public class MovieService {
     /**
      * How to retrieve data from Elastic Search via the RestHighLevelClient
      */
-    public List<MovieRating> findMoviesWithPropertiesLike(String property, String propertyItem) {
+    public List<MovieRating> findMoviesWithPropertiesLike(String fieldName, String fieldValue) {
 
         try (RestHighLevelClient elasticSearchClient = new RestHighLevelClient(RestClient.builder(new HttpHost(elasticSearchURL, elasticSearchPort, "http")))) {
 
             SearchRequest searchRequest = new SearchRequest(indexName);
             SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-            sourceBuilder.query(createMatcher(property, propertyItem));
+            sourceBuilder.query(createMatcher(fieldName, fieldValue));
 
             searchRequest.source(sourceBuilder);
 
@@ -107,8 +107,8 @@ public class MovieService {
         return movieRatingList;
     }
 
-    private MatchQueryBuilder createMatcher(String property, String propertyItem) {
-        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder(property, propertyItem);
+    private MatchQueryBuilder createMatcher(String fieldName, String fieldValue) {
+        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder(fieldName, fieldValue);
 
         matchQueryBuilder.fuzziness(Fuzziness.AUTO);
         matchQueryBuilder.prefixLength(3);

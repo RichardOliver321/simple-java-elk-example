@@ -31,9 +31,9 @@ public class MovieController {
         }
     }
 
-    @RequestMapping(value = "/{property}/{propertyItem}", method = RequestMethod.GET)
-    public Response<List<MovieRating>> getMoviesWithProperyLike(@PathVariable String property, @PathVariable String propertyItem) {
-        return Response.ok(movieService.findMoviesWithPropertiesLike(property, propertyItem), "Movies with property "
-                + property + " similar to " + propertyItem);
+    @RequestMapping(value = "/{fieldName}/{fieldValue}", method = RequestMethod.GET)
+    public Response<List<MovieRating>> getMoviesWithProperyLike(@PathVariable String fieldName, @PathVariable String fieldValue) {
+        return Response.ok(movieService.findMoviesWithPropertiesLike(fieldName, fieldValue), "Movies with fieldName "
+                + fieldName + " similar to " + fieldValue);
     }
 }
