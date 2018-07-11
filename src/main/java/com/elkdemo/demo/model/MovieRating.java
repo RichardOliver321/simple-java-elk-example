@@ -1,10 +1,13 @@
 package com.elkdemo.demo.model;
 
+import java.util.Date;
+
 public class MovieRating {
 
     private String title;
     private String directorName;
     private double rating;
+    private Date dateOfReview;
 
 
     public MovieRating() {
@@ -38,5 +41,13 @@ public class MovieRating {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public Date getDateOfReview() {
+        return dateOfReview;
+    }
+
+    public void setDateOfReview(Date dateOfReview) {
+        this.dateOfReview = dateOfReview;
     }
 }

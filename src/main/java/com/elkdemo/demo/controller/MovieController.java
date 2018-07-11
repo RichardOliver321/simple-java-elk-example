@@ -7,6 +7,7 @@ import io.swagger.annotations.SwaggerDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -23,6 +24,7 @@ public class MovieController {
     @RequestMapping(value = "/rate", method = RequestMethod.POST)
     public Response<MovieRating> saveMovieRating(@RequestBody MovieRating movieRating) {
         try {
+            movieRating.setDateOfReview(new Date());
             MovieRating savedMovieRating = movieService.saveMovieRating(movieRating);
 
             return Response.ok(savedMovieRating, "New Movie saved");
