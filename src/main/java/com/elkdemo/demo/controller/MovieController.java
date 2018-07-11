@@ -7,7 +7,8 @@ import io.swagger.annotations.SwaggerDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@SwaggerDefinition
+import java.util.List;
+
 @RestController
 @RequestMapping("/movie")
 public class MovieController {
@@ -30,9 +31,9 @@ public class MovieController {
         }
     }
 
-    @RequestMapping(value = "/average/rating/{movieTitle}", method = RequestMethod.GET)
-    public Response<MovieRating> getAverageRatingFormMovie(@PathVariable String movieTitle) {
-        return Response.ok(movieService.getAverageRating(movieTitle), "Average movie rating retrieved for : "
-                + movieTitle);
+    @RequestMapping(value = "/{property}/{propertyItem}", method = RequestMethod.GET)
+    public Response<List<MovieRating>> getMoviesWithProperyLike(@PathVariable String property, @PathVariable String propertyItem) {
+        return Response.ok(movieService.findMoviesWithPropertiesLike(property, propertyItem), "Movies with property "
+                + property + " similar to " + propertyItem);
     }
 }
