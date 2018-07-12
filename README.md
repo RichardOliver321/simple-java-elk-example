@@ -13,7 +13,10 @@ To download the image:<br/>
 e.g. docker pull sebp/elk:611 
 
 Run container:<br/>
-"docker run -i sebp/elk:<version>"
+"docker run -i sebp/elk:<version>" <br/>
+If you run into issues running it in this way try:<br/>
+sudo docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it sebp/elk:611 <br/>
+This command binds the ports of your local machine to the docker container (More found here: https://runnable.com/docker/binding-docker-ports)
 
 The docker pull command above will get a docker image of the ELK stack at version 6.1.1 (611) <br/>
 The version is important as it corresponds to the dependency version for the RestHighLevelClient. It is somewhat 
